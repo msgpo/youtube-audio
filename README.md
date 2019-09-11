@@ -1,8 +1,8 @@
-# <img src='youtube.png' width='64' style='vertical-align:bottom'/> Youtube
-Play audio from Youtube.
+# <img src='youtube.png' width='64' style='vertical-align:bottom'/> YouTube
+Play audio from YouTube.
 
 ## Description
-Does a basic search on youtube, and plays the first result as audio.
+Does a basic search on YouTube, and plays the first result as audio.
 
 Based on the I Heart Radio and Tunein skills by johnbartkiw.
 
