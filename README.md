@@ -1,4 +1,4 @@
-# <img src='tunein.png' width='50' style='vertical-align:bottom'/> TuneIn
+# <img src='youtube.png' width='64' style='vertical-align:bottom'/> Youtube
 Play audio from Youtube.
 
 ## Description
