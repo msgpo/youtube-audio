@@ -11,10 +11,12 @@ This is still untidy, but the basic functionality works.
 ## Examples
 * "Play Hendrix (on|with|using) youtube"
 * "Play Midnight in Harlem"
+* "Play Clapton Crossroads"
+* "Stop"
 
 ## Credits
-John Bartkiw
-mcdruid
+* mcdruid
+* John Bartkiw
 
 ## Category
 **Entertainment**
