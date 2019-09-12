@@ -74,22 +74,26 @@ class YoutubeSkill(CommonPlaySkill):
         html = res.content
         soup = BeautifulSoup(html, 'html.parser')
         vids = soup.findAll(attrs={'class':'yt-uix-tile-link'})
+
         for vid in vids:
+            if not re.match('/watch\?v=\w{11}', vid['href']):
+              LOG.debug('no media: ' + vid['href'])
+              continue
+
             self.vid_url = vid['href']
             self.vid_name = vid.string
             self.stream_url = self.get_stream_url(self.vid_url)
+            LOG.debug('Found stream URL: ' + self.vid_url)
+            LOG.debug('Media title: ' + self.vid_name)
+            tracklist.append(self.stream_url)
+            self.mediaplayer.add_list(tracklist)
             self.audio_state = 'playing'
             self.speak_dialog('now.playing', {'content': self.vid_name} )
             wait_while_speaking()
-            LOG.debug('Found stream URL: ' + self.vid_url)
-
-            tracklist.append(self.stream_url)
-            self.mediaplayer.add_list(tracklist)
             self.mediaplayer.play()
-
             return
 
-        # We didn't find any playable stations
+        # We didn't find any playable results
         self.speak_dialog('not.found')
         wait_while_speaking()
         LOG.debug('Could not find any results with the query term: ' + search_term)
@@ -116,16 +120,16 @@ class YoutubeSkill(CommonPlaySkill):
 
 # these don't work (yet?)
 #
-#   def pause(self, message=None):
+#    def pause(self, message=None):
 #       self.mediaplayer.pause()
 #
-#   def resume(self, message=None):
+#    def resume(self, message=None):
 #       self.mediaplayer.pause()
 #
-#   def next_track(self, message):
+#    def next_track(self, message):
 #       self.mediaplayer.next()
 #
-#   def prev_track(self, message):
+#    def prev_track(self, message):
 #       self.mediaplayer.previous()
 
     def shutdown(self):
