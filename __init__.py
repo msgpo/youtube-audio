@@ -106,8 +106,8 @@ class YoutubeSkill(CommonPlaySkill):
         all_vid_id = re.findall(r'/watch\?v=(.{11})', str(soup))
         if len(all_vid_id) >= 1:
             for vid_id in all_vid_id:
-                vid_url = base_url + "?video_id=" + str(vid_id)
-                self.stream_url = self.get_stream_url(str(vid_id))
+                vid_url = "?video_id=" + str(vid_id)
+                self.stream_url = self.get_stream_url(vid_url)
                 LOG.debug('Found stream URL: ' + self.stream_url)
                 tracklist.append(self.stream_url)
             LOG.info(str(tracklist))
