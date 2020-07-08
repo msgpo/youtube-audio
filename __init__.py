@@ -106,8 +106,8 @@ class YoutubeSkill(CommonPlaySkill):
         all_vid_id = re.findall(r'/watch\?v=(.{11})', str(soup))
         if len(all_vid_id) >= 1:
             for vid_id in all_vid_id:
-                vid_url = "?video_id=" + str(vid_id)
-                self.stream_url = self.get_stream_url(str(vid_id))
+                vid_url = "/watch?v=" + str(vid_id)
+                self.stream_url = self.get_stream_url(vid_url)
                 LOG.debug('Found stream URL: ' + self.stream_url)
                 tracklist.append(self.stream_url)
             LOG.info(str(tracklist))
@@ -125,8 +125,7 @@ class YoutubeSkill(CommonPlaySkill):
             LOG.debug('Could not find any results with the query term: ' + search_term)
 
     def get_stream_url(self, youtube_url):
-        abs_url = youtube_url
-        #abs_url = base_url + youtube_url
+        abs_url = base_url + youtube_url
         LOG.debug('pafy processing: ' + abs_url)
         streams = pafy.new(abs_url)
         LOG.debug('audiostreams found: ' + str(streams.audiostreams));
