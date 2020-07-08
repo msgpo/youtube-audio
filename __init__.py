@@ -109,6 +109,7 @@ class YoutubeSkill(CommonPlaySkill):
         if len(vids) >=1:
             for vid in vids:
                 tracklist.append(base_url + "?video_id=" + str(vid))
+            LOG.info(str(tracklist))
             self.mediaplayer.add_list(tracklist)
             self.audio_state = 'playing'
             self.speak_dialog('now.playing', {'content': self.vid_name})
