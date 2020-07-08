@@ -65,39 +65,37 @@ class YoutubeSkill(CommonPlaySkill):
         LOG.debug('CPS Start: ' + data)
         self.search_youtube(data)
 
-"""
     # Attempt to find the first result matching the query string
-    def search_youtube(self, search_term):
-        tracklist = []
-        res = requests.get(search_url + search_term)
-        # TODO: check status code etc...
-        html = res.content
-        soup = BeautifulSoup(html, 'html.parser')
-        vids = soup.findAll(attrs={'class':'yt-uix-tile-link'})
+#    def search_youtube(self, search_term):
+#        tracklist = []
+#        res = requests.get(search_url + search_term)
+#        # TODO: check status code etc...
+#        html = res.content
+#        soup = BeautifulSoup(html, 'html.parser')
+#        vids = soup.findAll(attrs={'class':'yt-uix-tile-link'})
 
-        for vid in vids:
-            if not re.match('/watch\?v=\w{11}', vid['href']):
-              LOG.debug('no media: ' + vid['href'])
-              continue
+#        for vid in vids:
+#            if not re.match('/watch\?v=\w{11}', vid['href']):
+#              LOG.debug('no media: ' + vid['href'])
+#              continue
 
-            self.vid_url = vid['href']
-            self.vid_name = vid.string
-            self.stream_url = self.get_stream_url(self.vid_url)
-            LOG.debug('Found stream URL: ' + self.vid_url)
-            LOG.debug('Media title: ' + self.vid_name)
-            tracklist.append(self.stream_url)
-            self.mediaplayer.add_list(tracklist)
-            self.audio_state = 'playing'
-            self.speak_dialog('now.playing', {'content': self.vid_name} )
-            wait_while_speaking()
-            self.mediaplayer.play()
-            return
+#            self.vid_url = vid['href']
+#            self.vid_name = vid.string
+#            self.stream_url = self.get_stream_url(self.vid_url)
+#            LOG.debug('Found stream URL: ' + self.vid_url)
+#            LOG.debug('Media title: ' + self.vid_name)
+#            tracklist.append(self.stream_url)
+#            self.mediaplayer.add_list(tracklist)
+#            self.audio_state = 'playing'
+#            self.speak_dialog('now.playing', {'content': self.vid_name} )
+#            wait_while_speaking()
+#            self.mediaplayer.play()
+#            return
 
-        # We didn't find any playable results
-        self.speak_dialog('not.found')
-        wait_while_speaking()
-        LOG.debug('Could not find any results with the query term: ' + search_term)
-"""
+#        # We didn't find any playable results
+#        self.speak_dialog('not.found')
+#        wait_while_speaking()
+#        LOG.debug('Could not find any results with the query term: ' + search_term)
 
     def search_youtube(self, search_term):
         tracklist = []
