@@ -106,11 +106,15 @@ class YoutubeSkill(CommonPlaySkill):
         vids = re.findall(r'/watch\?v=(.{11})', str(soup))
         if len(vids) >=1:
             for vid in vids:
-                tracklist.append(base_url + "?video_id=" + str(vid))
+                vid_url = base_url + "?video_id=" + str(vid)
+                self.stream_url = self.get_stream_url(vid_url)
+                LOG.debug('Found stream URL: ' + self.stream_url)
+                tracklist.append(self.stream_url)
             LOG.info(str(tracklist))
             self.mediaplayer.add_list(tracklist)
+            vid_name = str(search_term)
             self.audio_state = 'playing'
-            self.speak_dialog('now.playing', {'content': self.vid_name})
+            self.speak_dialog('now.playing', {'content': vid_name})
             wait_while_speaking()
             self.mediaplayer.play()
             return
