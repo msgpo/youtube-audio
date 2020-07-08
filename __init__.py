@@ -107,7 +107,7 @@ class YoutubeSkill(CommonPlaySkill):
         if len(vids) >=1:
             for vid in vids:
                 vid_url = base_url + "?video_id=" + str(vid)
-                self.stream_url = self.get_stream_url(vid_url)
+                self.stream_url = self.get_stream_url(str(vid))
                 LOG.debug('Found stream URL: ' + self.stream_url)
                 tracklist.append(self.stream_url)
             LOG.info(str(tracklist))
