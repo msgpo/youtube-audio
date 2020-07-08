@@ -52,9 +52,9 @@ class YoutubeSkill(CommonPlaySkill):
 
     def CPS_match_query_phrase(self, phrase):
         # Look for regex matches starting from the most specific to the least
-
         # Play <data> on youtube
         match = re.search(self.translate_regex('on_youtube'), phrase)
+        LOG.info('youtube skill received: ' + str(phrase))
         if match:
             data = re.sub(self.translate_regex('on_youtube'), '', phrase)
             LOG.debug('CPS Match (on_youtube): ' + data)
